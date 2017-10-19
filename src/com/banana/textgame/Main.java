@@ -25,7 +25,7 @@ public class Main {
      * Метод вызывается один раз при старте игры.
      */
     void onStart() {
-
+        System.out.prinln("Дратути!");
     }
 
     /*
