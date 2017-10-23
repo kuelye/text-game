@@ -36,7 +36,7 @@ public class Main {
 
         System.out.println("Как тебе зовут?");
         String имя = клавиатура.nextLine();
-        System.out.println("Привет, " + имя);
+        System.out.println("Здравствуй, " + имя);
     }
 
     /*
