@@ -1,5 +1,7 @@
 package com.banana.textgame;
 
+import java.util.Scanner;
+
 public class Main {
 
     /*
@@ -25,7 +27,16 @@ public class Main {
      * Метод вызывается один раз при старте игры.
      */
     void onStart() {
+        System.out.println("Добро пожаловать в симулятор ...");
 
+        Scanner клавиатура = new Scanner(System.in);
+        System.out.println("Сколько тебе лет?");
+        int возраст = клавиатура.nextInt();
+        клавиатура.nextLine();
+
+        System.out.println("Как тебе зовут?");
+        String имя = клавиатура.nextLine();
+        System.out.println("Привет, " + имя);
     }
 
     /*
