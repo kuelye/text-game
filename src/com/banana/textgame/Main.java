@@ -1,9 +1,11 @@
 package com.banana.textgame;
 
+import java.util.Scanner;
+
 public class Main {
 
     /*
-     * Главный метод.
+     * Главный метод. :c
      */
     public static void main(String[] args) {
         // вызывает метод start()
@@ -25,15 +27,27 @@ public class Main {
      * Метод вызывается один раз при старте игры.
      */
     void onStart() {
-        System.out.println("Дратути!");
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("Кто вы такой?");
+        String имя = keyboard.nextLine();
+        System.out.println("Привет, " + имя + "!");
     }
+
+    int dollars = 0;
 
     /*
      * Метод вызывается каждый игровый день.
      * Единственный параметр: dayNumber - номер текущего игрового дня.
      */
     void onNewDay(int dayNumber) {
+        System.out.println("День номер " + dayNumber + ".");
 
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("Ваш код на сегодня:");
+        String код = keyboard.nextLine();
+        dollars = dollars + код.length();
+
+        System.out.println("Ваш счёт: " + dollars + "$.");
     }
 
     /*
