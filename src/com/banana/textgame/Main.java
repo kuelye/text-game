@@ -43,11 +43,20 @@ public class Main {
         System.out.println("День номер " + dayNumber + ".");
 
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Ваш код на сегодня:");
-        String код = keyboard.nextLine();
-        dollars = dollars + код.length();
+        System.out.println("Ваше действие:");
+        String action = keyboard.nextLine();
 
-        System.out.println("Ваш счёт: " + dollars + "$.");
+        if (action.equals("кофе")) {
+            dollars = dollars - 2;
+            System.out.println("Кофе, ура!");
+        } else if (action.equals("код")) {
+            System.out.println("Ваш код на сегодня:");
+            String код = keyboard.nextLine();
+            dollars = dollars + код.length();
+            System.out.println("Ваш счёт: " + dollars + "$.");
+        } else {
+            System.out.println("Операция не поддерживается.");
+        }
     }
 
     /*
