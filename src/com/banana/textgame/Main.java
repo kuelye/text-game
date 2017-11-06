@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     /*
-     * Главный метод. :c
+     * Главный метод.
      */
     public static void main(String[] args) {
         // вызывает метод start()
@@ -27,10 +27,12 @@ public class Main {
      * Метод вызывается один раз при старте игры.
      */
     void onStart() {
-        Scanner keyboard = new Scanner(System.in);
-        System.out.println("Кто вы такой?");
-        String имя = keyboard.nextLine();
-        System.out.println("Привет, " + имя + "!");
+        System.out.println("Добро пожаловать в симулятор ...");
+
+        Scanner клавиатура = new Scanner(System.in);
+        System.out.println("Как тебе зовут?");
+        String имя = клавиатура.nextLine();
+        System.out.println("Здравствуй, " + имя);
     }
 
     int dollars = 0;
