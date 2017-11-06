@@ -17,8 +17,11 @@ public class Main {
      */
     private void start() {
         onStart();
-        for (int i = 1; i <= 5; ++i) {
+        for (int i = 1; i <= 31; i = i + 2) {
             onNewDay(i);
+            if (tired) {
+                break;
+            }
         }
         onFinish();
     }
@@ -33,6 +36,7 @@ public class Main {
         System.out.println("Привет, " + имя + "!");
     }
 
+    boolean tired = false;
     int dollars = 0;
 
     /*
@@ -41,21 +45,31 @@ public class Main {
      */
     void onNewDay(int dayNumber) {
         System.out.println("День номер " + dayNumber + ".");
+        String dollarsString = "";
+        for (int i = 0; i < dollars; i += 1) {
+            dollarsString = dollarsString + "$";
+        }
+        System.out.println("Ваш счёт: " + dollarsString + ".");
 
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Ваше действие:");
         String action = keyboard.nextLine();
 
-        if (action.equals("кофе")) {
-            dollars = dollars - 2;
-            System.out.println("Кофе, ура!");
-        } else if (action.equals("код")) {
-            System.out.println("Ваш код на сегодня:");
-            String код = keyboard.nextLine();
-            dollars = dollars + код.length();
-            System.out.println("Ваш счёт: " + dollars + "$.");
-        } else {
-            System.out.println("Операция не поддерживается.");
+        switch (action.toLowerCase()) {
+            case "кофе":
+                dollars = dollars - 2;
+                System.out.println("Кофе, ура!");
+                break;
+            case "код":
+                System.out.println("Ваш код на сегодня:");
+                String код = keyboard.nextLine();
+                dollars = dollars + код.length();
+                break;
+            case "устал":
+                tired = true;
+                break;
+            default:
+                System.out.println("Операция не поддерживается.");
         }
     }
 
@@ -63,7 +77,7 @@ public class Main {
      * Метод вызывается по завершению игры.
      */
     void onFinish() {
-
+        System.out.print("Пока-пока, ваш счет: " + dollars + "$.");
     }
 
 }
