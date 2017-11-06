@@ -36,6 +36,7 @@ public class Main {
     }
 
     int dollars = 0;
+    int mood = 3;
 
     /*
      * Метод вызывается каждый игровый день.
@@ -43,13 +44,33 @@ public class Main {
      */
     void onNewDay(int dayNumber) {
         System.out.println("День номер " + dayNumber + ".");
+        System.out.println("Ваш счёт: " + dollars + "$.");
+        String smiles = "";
+        for (int i = 1; i <= mood; i = i + 1) {
+            smiles = smiles + "☺";
+        }
+        System.out.println("Ваше настроение: " + smiles + ".");
 
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Ваш код на сегодня:");
-        String код = keyboard.nextLine();
-        dollars = dollars + код.length();
-
-        System.out.println("Ваш счёт: " + dollars + "$.");
+        System.out.println("Чего делать будем?");
+        String action = keyboard.nextLine();
+        switch (action.toLowerCase()) {
+            case "код":
+                // пишём код
+                System.out.println("Ваш код на сегодня:");
+                String код = keyboard.nextLine();
+                dollars = dollars + код.length();
+                mood = mood - 1;
+                break;
+            case "скакалка":
+                // прыгаем на скакалке
+                System.out.println("Окей, вы попрыгали на скакалке.");
+                mood = mood + 2;
+                break;
+            default:
+                // отображаем ошибку
+                System.out.println("Ошибка.");
+        }
     }
 
     /*
