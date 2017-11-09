@@ -31,13 +31,20 @@ public class Main {
      */
     void onStart() {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Кто вы такой?");
+        String[] vs = {"Кто вы такой?", "Здравствуйте, представьтесь.", "Архрргхххх."};
+        String v = vs[(int) (Math.random() * vs.length)];
+        System.out.println(v);
         String имя = keyboard.nextLine();
         System.out.println("Привет, " + имя + "!");
     }
 
+    // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+
     boolean tired = false;
     int dollars = 0;
+    String[] доступныеЯзыки = {"Java", "Python", "JavaScript", "C++", "Brainfuck"};
+    boolean[] известныеЯзыки = {true, false, false, false, false};
+    Scanner keyboard = new Scanner(System.in);
 
     /*
      * Метод вызывается каждый игровый день.
@@ -50,12 +57,15 @@ public class Main {
             dollarsString = dollarsString + "$";
         }
         System.out.println("Ваш счёт: " + dollarsString + ".");
+        напечатайИзвестныеЯзыки();
 
-        Scanner keyboard = new Scanner(System.in);
         System.out.println("Ваше действие:");
         String action = keyboard.nextLine();
 
         switch (action.toLowerCase()) {
+            case "изучить":
+                learnLanguage();
+                break;
             case "кофе":
                 dollars = dollars - 2;
                 System.out.println("Кофе, ура!");
@@ -78,6 +88,29 @@ public class Main {
      */
     void onFinish() {
         System.out.print("Пока-пока, ваш счет: " + dollars + "$.");
+    }
+
+    // ДЕЙСТВИЯ
+
+    void learnLanguage() {
+        System.out.println("Какой язык будем учить?");
+        String выбранныйЯзык = keyboard.nextLine();
+
+        for (int i = 0; i < доступныеЯзыки.length; ++i) {
+            if (доступныеЯзыки[i].equals(выбранныйЯзык)) {
+                известныеЯзыки[i] = true;
+                dollars -= 20;
+            }
+        }
+    }
+
+    void напечатайИзвестныеЯзыки() {
+        System.out.println("Вы знаете следующие языки:");
+        for (int i = 0; i < доступныеЯзыки.length; ++i) {
+            if (известныеЯзыки[i] == true) {
+                System.out.println(доступныеЯзыки[i]);
+            }
+        }
     }
 
 }
