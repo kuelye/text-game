@@ -1,5 +1,7 @@
 package com.banana.textgame;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -30,13 +32,20 @@ public class Main {
         System.out.println("Добро пожаловать в симулятор ...");
 
         Scanner клавиатура = new Scanner(System.in);
-        System.out.println("Как тебе зовут?");
+        String[] варианты = {"Как тебя зовут?", "Здрасьте, ваше имя?", "Пиу-пиу-пиу."};
+        int числоОт0доN = (int) (Math.random() * варианты.length);
+        System.out.println(варианты[числоОт0доN]);
         String имя = клавиатура.nextLine();
         System.out.println("Здравствуй, " + имя);
     }
 
+    // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+
     int dollars = 0;
     int mood = 3;
+    String[] доступныеЯзыки = {"Java", "Python", "Kotlin", "Pascal", "Ada", "C", "JavaScript"};
+    boolean[] изученныеЯзыки = {true, false, false, false, false, false, false};
+    Scanner keyboard = new Scanner(System.in);
 
     /*
      * Метод вызывается каждый игровый день.
@@ -50,11 +59,14 @@ public class Main {
             smiles = smiles + "☺";
         }
         System.out.println("Ваше настроение: " + smiles + ".");
+        напечатайИзученныеЯзыки();
 
-        Scanner keyboard = new Scanner(System.in);
         System.out.println("Чего делать будем?");
         String action = keyboard.nextLine();
         switch (action.toLowerCase()) {
+            case "изучить":
+                изучитьЯзык();
+                break;
             case "код":
                 // пишём код
                 System.out.println("Ваш код на сегодня:");
@@ -71,10 +83,6 @@ public class Main {
                 // отображаем ошибку
                 System.out.println("Ошибка.");
         }
-
-        try (Scanner sc = new Scanner(System.in)) {
-            String age = sc.nextLine();
-        }
     }
 
     /*
@@ -82,6 +90,40 @@ public class Main {
      */
     void onFinish() {
 
+    }
+
+    // ДЕЙСТВИЯ
+
+    void изучитьЯзык() {
+        System.out.println("А какой язык?");
+        String выбранныйЯзык = keyboard.nextLine();
+
+        for (int i = 0; i < доступныеЯзыки.length; i++) {
+            if (доступныеЯзыки[i].equals(выбранныйЯзык)) {
+                if ((изученныеЯзыки[i] == false) && mood > 0 && dollars >= 20) {
+                    изученныеЯзыки[i] = true;
+                    dollars -= 20;
+                    mood -= 1;
+                } else if (mood == 0) {
+                    System.out.println("Вам слишком грустно.");
+                } else if (dollars < 20) {
+                    System.out.println("У вас совсем нет денег.");
+                } else if (изученныеЯзыки[i] == true) {
+                    System.out.println("Вы уже знаете этот язык.");
+                }
+
+                return;
+            }
+        }
+    }
+
+    void напечатайИзученныеЯзыки() {
+        System.out.println("Вы знаете языки:");
+        for (int i = 0; i < изученныеЯзыки.length; i++) {
+            if (изученныеЯзыки[i] == true) {
+                System.out.println(" • " + доступныеЯзыки[i]);
+            }
+        }
     }
 
 }
