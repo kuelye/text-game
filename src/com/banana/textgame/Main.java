@@ -71,6 +71,10 @@ public class Main {
                 // отображаем ошибку
                 System.out.println("Ошибка.");
         }
+
+        try (Scanner sc = new Scanner(System.in)) {
+            String age = sc.nextLine();
+        }
     }
 
     /*
