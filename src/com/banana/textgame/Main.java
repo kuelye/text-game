@@ -46,6 +46,7 @@ public class Main {
     String[] доступныеЯзыки = {"Java", "Python", "Kotlin", "Pascal", "Ada", "C", "JavaScript"};
     boolean[] изученныеЯзыки = {true, false, false, false, false, false, false};
     Scanner keyboard = new Scanner(System.in);
+    ArrayList<String> компании = new ArrayList<>();
 
     /*
      * Метод вызывается каждый игровый день.
@@ -60,10 +61,14 @@ public class Main {
         }
         System.out.println("Ваше настроение: " + smiles + ".");
         напечатайИзученныеЯзыки();
+        System.out.println("Компании, в которых вы работаете: " + компании + ".");
 
         System.out.println("Чего делать будем?");
         String action = keyboard.nextLine();
         switch (action.toLowerCase()) {
+            case "работа":
+                найтиРаботу();
+                break;
             case "изучить":
                 изучитьЯзык();
                 break;
@@ -73,6 +78,9 @@ public class Main {
                 String код = keyboard.nextLine();
                 dollars = dollars + код.length();
                 mood = mood - 1;
+                break;
+            case "пельмешки":
+                скушатьПельмешки();
                 break;
             case "скакалка":
                 // прыгаем на скакалке
@@ -89,7 +97,7 @@ public class Main {
      * Метод вызывается по завершению игры.
      */
     void onFinish() {
-
+        System.out.println("количество набранных очков:" + верниФинальныеОчки() );
     }
 
     // ДЕЙСТВИЯ
@@ -117,6 +125,10 @@ public class Main {
         }
     }
 
+    void изучитьЯзык(String язык) {
+        System.out.println("Вы изучили " + язык + ".");
+    }
+
     void напечатайИзученныеЯзыки() {
         System.out.println("Вы знаете языки:");
         for (int i = 0; i < изученныеЯзыки.length; i++) {
@@ -124,6 +136,36 @@ public class Main {
                 System.out.println(" • " + доступныеЯзыки[i]);
             }
         }
+    }
+
+    void скушатьПельмешки() {
+        System.out.println("сколько пельмешек?");
+        int количествоПельмешек = keyboard.nextInt();
+        скушатьПельмешки(количествоПельмешек);
+    }
+
+    void скушатьПельмешки(int количествоПельмешек) {
+        dollars = dollars - 5 * количествоПельмешек;
+        mood = mood + 5 * количествоПельмешек;
+    }
+
+    int верниФинальныеОчки () {
+        int очки = dollars * 2 + mood * 6;
+        for (int i = 0; i < изученныеЯзыки.length; i++) {
+            if (изученныеЯзыки[i] == true) {
+                очки = очки + 4;
+
+            }
+        }
+        return очки;
+
+
+    }
+
+    void найтиРаботу() {
+        System.out.println("В какой компании будете работать?");
+        String компания = keyboard.nextLine();
+        компании.add(компания);
     }
 
 }
