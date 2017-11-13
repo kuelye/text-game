@@ -1,5 +1,6 @@
 package com.banana.textgame;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -70,6 +71,9 @@ public class Main {
                 dollars = dollars - 2;
                 System.out.println("Кофе, ура!");
                 break;
+            case "пицца":
+                съестьПицку();
+                break;
             case "код":
                 System.out.println("Ваш код на сегодня:");
                 String код = keyboard.nextLine();
@@ -87,7 +91,7 @@ public class Main {
      * Метод вызывается по завершению игры.
      */
     void onFinish() {
-        System.out.print("Пока-пока, ваш счет: " + dollars + "$.");
+        System.out.print("Пока-пока, вы набрали очков: " + верниОчки());
     }
 
     // ДЕЙСТВИЯ
@@ -111,6 +115,29 @@ public class Main {
                 System.out.println(доступныеЯзыки[i]);
             }
         }
+    }
+
+    void съестьПицку() {
+        System.out.println("Сколько кусков пицки?");
+        int количествоКусков = keyboard.nextInt();
+        keyboard.nextLine();
+        съестьПицку(количествоКусков, 2);
+    }
+
+    void съестьПицку(int количествоКусков, int стоимостьПиццы) {
+        System.out.println("Вы скушали " + количествоКусков + " кусков пицки.");
+        dollars -= стоимостьПиццы * количествоКусков;
+    }
+
+    int верниОчки() {
+        int очки = dollars;
+        for (int i = 0; i < известныеЯзыки.length; i += 1) {
+            if (известныеЯзыки[i] == true) {
+                очки += 10;
+            }
+        }
+
+        return очки;
     }
 
 }
