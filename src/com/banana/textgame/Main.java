@@ -46,6 +46,7 @@ public class Main {
     String[] доступныеЯзыки = {"Java", "Python", "JavaScript", "C++", "Brainfuck"};
     boolean[] известныеЯзыки = {true, false, false, false, false};
     Scanner keyboard = new Scanner(System.in);
+    ArrayList компании = new ArrayList();
 
     /*
      * Метод вызывается каждый игровый день.
@@ -57,12 +58,15 @@ public class Main {
         for (int i = 0; i < dollars; i += 1) {
             dollarsString = dollarsString + "$";
         }
+        System.out.println("Компании, в которых вы работаете:");
+        for (int i = 0; i < компании.size(); i += 1) {
+            System.out.println("- " + компании.get(i));
+        }
         System.out.println("Ваш счёт: " + dollarsString + ".");
         напечатайИзвестныеЯзыки();
 
         System.out.println("Ваше действие:");
         String action = keyboard.nextLine();
-
         switch (action.toLowerCase()) {
             case "изучить":
                 learnLanguage();
@@ -81,6 +85,9 @@ public class Main {
                 break;
             case "устал":
                 tired = true;
+                break;
+            case "работа":
+                найтиРаботу();
                 break;
             default:
                 System.out.println("Операция не поддерживается.");
@@ -119,14 +126,24 @@ public class Main {
 
     void съестьПицку() {
         System.out.println("Сколько кусков пицки?");
-        int количествоКусков = keyboard.nextInt();
-        keyboard.nextLine();
-        съестьПицку(количествоКусков, 2);
+        String строка = keyboard.nextLine();
+        try {
+            int количествоКусков = Integer.parseInt(строка);
+            съестьПицку(количествоКусков, 2);
+        } catch (Exception e) {
+            System.out.println("Ошибочка. :с");
+        }
     }
 
     void съестьПицку(int количествоКусков, int стоимостьПиццы) {
         System.out.println("Вы скушали " + количествоКусков + " кусков пицки.");
         dollars -= стоимостьПиццы * количествоКусков;
+    }
+
+    void найтиРаботу(){
+        System.out.println("Какую Работу Хотите?");
+        String компания = keyboard.nextLine();
+        компании.add(компания);
     }
 
     int верниОчки() {
