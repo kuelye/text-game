@@ -30,7 +30,6 @@ public class Main {
      */
     void onStart() {
         System.out.println("Добро пожаловать в симулятор ...");
-
         Scanner клавиатура = new Scanner(System.in);
         String[] варианты = {"Как тебя зовут?", "Здрасьте, ваше имя?", "Пиу-пиу-пиу."};
         int числоОт0доN = (int) (Math.random() * варианты.length);
@@ -79,6 +78,7 @@ public class Main {
                 dollars = dollars + код.length();
                 mood = mood - 1;
                 break;
+
             case "пельмешки":
                 скушатьПельмешки();
                 break;
@@ -86,6 +86,9 @@ public class Main {
                 // прыгаем на скакалке
                 System.out.println("Окей, вы попрыгали на скакалке.");
                 mood = mood + 2;
+                break;
+            case "играть":
+                броситьКость();
                 break;
             default:
                 // отображаем ошибку
@@ -139,9 +142,18 @@ public class Main {
     }
 
     void скушатьПельмешки() {
-        System.out.println("сколько пельмешек?");
-        int количествоПельмешек = keyboard.nextInt();
-        скушатьПельмешки(количествоПельмешек);
+        boolean данныеВведеныВерно = false;
+        while (данныеВведеныВерно == false) {
+            System.out.println("сколько пельмешек?");
+            String строка = keyboard.nextLine();
+            try {
+                int количествоПельмешек = Integer.parseInt(строка);
+                скушатьПельмешки(количествоПельмешек);
+                данныеВведеныВерно = true;
+            } catch (Exception e) {
+                System.out.println("Ошибка парсинга. :с");
+            }
+        }
     }
 
     void скушатьПельмешки(int количествоПельмешек) {
@@ -158,14 +170,23 @@ public class Main {
             }
         }
         return очки;
-
-
     }
 
     void найтиРаботу() {
         System.out.println("В какой компании будете работать?");
         String компания = keyboard.nextLine();
         компании.add(компания);
+    }
+
+    void броситьКость() {
+        int число1 = (int) (Math.random() * 6 + 1);
+        int число2 = (int) (Math.random() * 6 + 1);
+        System.out.println("Вам выпали: " + String.valueOf(число1) + " и " + String.valueOf(число2) + ".");
+        dollars -= 1;
+        if (Math.max(число1, число2) % 2 == 0) {
+            System.out.println("Ура, вы выиграли!");
+            dollars += 5;
+        }
     }
 
 }
