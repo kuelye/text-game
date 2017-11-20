@@ -125,13 +125,17 @@ public class Main {
     }
 
     void съестьПицку() {
-        System.out.println("Сколько кусков пицки?");
-        String строка = keyboard.nextLine();
-        try {
-            int количествоКусков = Integer.parseInt(строка);
-            съестьПицку(количествоКусков, 2);
-        } catch (Exception e) {
-            System.out.println("Ошибочка. :с");
+        boolean корректныйВвод = false;
+        while (корректныйВвод == false) {
+            System.out.println("Сколько кусков пицки?");
+            String строка = keyboard.nextLine();
+            try {
+                int количествоКусков = Integer.parseInt(строка);
+                съестьПицку(количествоКусков, 2);
+                корректныйВвод = true;
+            } catch (Exception e) {
+                System.out.println("Ошибочка. :с");
+            }
         }
     }
 
