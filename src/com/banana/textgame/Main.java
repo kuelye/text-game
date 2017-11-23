@@ -5,12 +5,17 @@ import java.util.Scanner;
 
 public class Main {
 
+    String[] доступныеЯзыки = {"Java", "Python", "JavaScript", "C++", "Brainfuck"};
+    Scanner keyboard = new Scanner(System.in);
+    User пользователь = new User();
+
     /*
      * Главный метод. :/
      */
     public static void main(String[] args) {
         // вызывает метод start()
-        new Main().start();
+        Main main = new Main();
+        main.start();
     }
 
     /*
@@ -20,7 +25,7 @@ public class Main {
         onStart();
         for (int i = 1; i <= 31; i = i + 2) {
             onNewDay(i);
-            if (tired) {
+            if (пользователь.tired) {
                 break;
             }
         }
@@ -39,15 +44,6 @@ public class Main {
         System.out.println("Привет, " + имя + "!");
     }
 
-    // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
-
-    boolean tired = false;
-    int dollars = 0;
-    String[] доступныеЯзыки = {"Java", "Python", "JavaScript", "C++", "Brainfuck"};
-    boolean[] известныеЯзыки = {true, false, false, false, false};
-    Scanner keyboard = new Scanner(System.in);
-    ArrayList компании = new ArrayList();
-
     /*
      * Метод вызывается каждый игровый день.
      * Единственный параметр: dayNumber - номер текущего игрового дня.
@@ -55,12 +51,12 @@ public class Main {
     void onNewDay(int dayNumber) {
         System.out.println("День номер " + dayNumber + ".");
         String dollarsString = "";
-        for (int i = 0; i < dollars; i += 1) {
+        for (int i = 0; i < пользователь.dollars; i += 1) {
             dollarsString = dollarsString + "$";
         }
         System.out.println("Компании, в которых вы работаете:");
-        for (int i = 0; i < компании.size(); i += 1) {
-            System.out.println("- " + компании.get(i));
+        for (int i = 0; i < пользователь.компании.size(); i += 1) {
+            System.out.println("- " + пользователь.компании.get(i));
         }
         System.out.println("Ваш счёт: " + dollarsString + ".");
         напечатайИзвестныеЯзыки();
@@ -72,7 +68,7 @@ public class Main {
                 learnLanguage();
                 break;
             case "кофе":
-                dollars = dollars - 2;
+                пользователь.dollars = пользователь.dollars - 2;
                 System.out.println("Кофе, ура!");
                 break;
             case "пицца":
@@ -81,10 +77,10 @@ public class Main {
             case "код":
                 System.out.println("Ваш код на сегодня:");
                 String код = keyboard.nextLine();
-                dollars = dollars + код.length();
+                пользователь.dollars = пользователь.dollars + код.length();
                 break;
             case "устал":
-                tired = true;
+                пользователь.tired = true;
                 break;
             case "работа":
                 найтиРаботу();
@@ -109,8 +105,8 @@ public class Main {
 
         for (int i = 0; i < доступныеЯзыки.length; ++i) {
             if (доступныеЯзыки[i].equals(выбранныйЯзык)) {
-                известныеЯзыки[i] = true;
-                dollars -= 20;
+                пользователь.известныеЯзыки[i] = true;
+                пользователь.dollars -= 20;
             }
         }
     }
@@ -118,7 +114,7 @@ public class Main {
     void напечатайИзвестныеЯзыки() {
         System.out.println("Вы знаете следующие языки:");
         for (int i = 0; i < доступныеЯзыки.length; ++i) {
-            if (известныеЯзыки[i] == true) {
+            if (пользователь.известныеЯзыки[i] == true) {
                 System.out.println(доступныеЯзыки[i]);
             }
         }
@@ -141,19 +137,19 @@ public class Main {
 
     void съестьПицку(int количествоКусков, int стоимостьПиццы) {
         System.out.println("Вы скушали " + количествоКусков + " кусков пицки.");
-        dollars -= стоимостьПиццы * количествоКусков;
+        пользователь.dollars -= стоимостьПиццы * количествоКусков;
     }
 
     void найтиРаботу(){
         System.out.println("Какую Работу Хотите?");
         String компания = keyboard.nextLine();
-        компании.add(компания);
+        пользователь.компании.add(компания);
     }
 
     int верниОчки() {
-        int очки = dollars;
-        for (int i = 0; i < известныеЯзыки.length; i += 1) {
-            if (известныеЯзыки[i] == true) {
+        int очки = пользователь.dollars;
+        for (int i = 0; i < пользователь.известныеЯзыки.length; i += 1) {
+            if (пользователь.известныеЯзыки[i] == true) {
                 очки += 10;
             }
         }
