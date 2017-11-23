@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    String[] доступныеЯзыки = {"Java", "Python", "JavaScript", "C++", "Brainfuck"};
+    static String[] доступныеЯзыки = {"Java", "Python", "JavaScript", "C++", "Brainfuck"};
     Scanner keyboard = new Scanner(System.in);
     User пользователь = new User();
 
@@ -50,16 +50,7 @@ public class Main {
      */
     void onNewDay(int dayNumber) {
         System.out.println("День номер " + dayNumber + ".");
-        String dollarsString = "";
-        for (int i = 0; i < пользователь.dollars; i += 1) {
-            dollarsString = dollarsString + "$";
-        }
-        System.out.println("Компании, в которых вы работаете:");
-        for (int i = 0; i < пользователь.компании.size(); i += 1) {
-            System.out.println("- " + пользователь.компании.get(i));
-        }
-        System.out.println("Ваш счёт: " + dollarsString + ".");
-        напечатайИзвестныеЯзыки();
+        пользователь.printInfo();
 
         System.out.println("Ваше действие:");
         String action = keyboard.nextLine();
@@ -111,15 +102,6 @@ public class Main {
         }
     }
 
-    void напечатайИзвестныеЯзыки() {
-        System.out.println("Вы знаете следующие языки:");
-        for (int i = 0; i < доступныеЯзыки.length; ++i) {
-            if (пользователь.известныеЯзыки[i] == true) {
-                System.out.println(доступныеЯзыки[i]);
-            }
-        }
-    }
-
     void съестьПицку() {
         boolean корректныйВвод = false;
         while (корректныйВвод == false) {
@@ -127,7 +109,7 @@ public class Main {
             String строка = keyboard.nextLine();
             try {
                 int количествоКусков = Integer.parseInt(строка);
-                съестьПицку(количествоКусков, 2);
+                съестьПицку(количествоКусков);
                 корректныйВвод = true;
             } catch (Exception e) {
                 System.out.println("Ошибочка. :с");
@@ -135,9 +117,10 @@ public class Main {
         }
     }
 
-    void съестьПицку(int количествоКусков, int стоимостьПиццы) {
+    void съестьПицку(int количествоКусков) {
         System.out.println("Вы скушали " + количествоКусков + " кусков пицки.");
-        пользователь.dollars -= стоимостьПиццы * количествоКусков;
+        Pizza невкуснаяПицца = new Pizza();
+        пользователь.dollars -= невкуснаяПицца.getPrice(количествоКусков);
     }
 
     void найтиРаботу(){
