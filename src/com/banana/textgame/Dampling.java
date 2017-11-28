@@ -1,6 +1,6 @@
 package com.banana.textgame;
 
-public class Dampling extends Еда {
+public class Dampling extends Food {
 
     int стоимость = 5;
     int жирок = 1;
