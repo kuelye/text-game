@@ -1,11 +1,15 @@
 package com.banana.textgame;
 
-public class Pizza {
+public class Pizza extends Food implements Product, Vkusniyatina {
 
-    int price = 2;
+    @Override
+    int getPrice1() {
+        return 2112321;
+    }
 
-    int getPrice(int number) {
-        return number * price;
+    @Override
+    public int getУровеньВкуса() {
+        return 0;
     }
 
 }

@@ -2,6 +2,8 @@ package com.banana.textgame;
 
 import java.util.ArrayList;
 
+import static com.banana.textgame.LanguageType.JAVA;
+
 public class User {
 
     public boolean tired = false;

@@ -1,6 +1,5 @@
 package com.banana.textgame;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -63,7 +62,11 @@ public class Main {
                 System.out.println("Кофе, ура!");
                 break;
             case "пицца":
-                съестьПицку();
+                Pizza pizza = new Pizza();
+                съесть(pizza);
+                break;
+            case "хлопушки":
+                съесть(new Hlopushki());
                 break;
             case "код":
                 System.out.println("Ваш код на сегодня:");
@@ -102,14 +105,14 @@ public class Main {
         }
     }
 
-    void съестьПицку() {
+    void съесть(Food еда) {
         boolean корректныйВвод = false;
         while (корректныйВвод == false) {
-            System.out.println("Сколько кусков пицки?");
+            System.out.println("Сколько кусков еды?");
             String строка = keyboard.nextLine();
             try {
                 int количествоКусков = Integer.parseInt(строка);
-                съестьПицку(количествоКусков);
+                съесть(еда, количествоКусков);
                 корректныйВвод = true;
             } catch (Exception e) {
                 System.out.println("Ошибочка. :с");
@@ -117,10 +120,9 @@ public class Main {
         }
     }
 
-    void съестьПицку(int количествоКусков) {
-        System.out.println("Вы скушали " + количествоКусков + " кусков пицки.");
-        Pizza невкуснаяПицца = new Pizza();
-        пользователь.dollars -= невкуснаяПицца.getPrice(количествоКусков);
+    void съесть(Food еда, int количествоКусков) {
+        System.out.println("Вы скушали " + количествоКусков + " кусков еды.");
+        пользователь.dollars -= еда.getPriceN(количествоКусков);
     }
 
     void найтиРаботу(){
