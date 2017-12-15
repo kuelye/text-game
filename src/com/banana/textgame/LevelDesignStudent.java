@@ -1,5 +1,7 @@
 package com.banana.textgame;
 
+import java.util.Arrays;
+
 public class LevelDesignStudent extends GameDevStudent implements IUnityMaster, IDesignStudent {
 
     @Override
@@ -13,6 +15,11 @@ public class LevelDesignStudent extends GameDevStudent implements IUnityMaster, 
 
     public boolean knowPhotoshop() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " Уроверь владения Unity: " + getUnitySkillLevel() + ".";
     }
 
 }
