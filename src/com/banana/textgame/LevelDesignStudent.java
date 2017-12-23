@@ -2,7 +2,7 @@ package com.banana.textgame;
 
 import java.util.Arrays;
 
-public class LevelDesignStudent extends GameDevStudent implements IUnityMaster, IDesignStudent {
+public class LevelDesignStudent extends GameDevStudent implements IUnityMaster, IDesignStudent, Comparable<LevelDesignStudent> {
 
     String surname;
     int age;
@@ -32,7 +32,16 @@ public class LevelDesignStudent extends GameDevStudent implements IUnityMaster, 
 
     @Override
     public String toString() {
-        return super.toString() + " Уроверь владения Unity: " + getUnitySkillLevel() + ".";
+        return name + " " + surname;
+    }
+
+    @Override
+    public int compareTo(LevelDesignStudent o) {
+        if (name.equals(o.name)) { // если имена совпадают, то
+            return surname.compareTo(o.surname); // сортируем по фамилии
+        } else { // иначе
+            return name.compareTo(o.name); // сортируем по имени
+        }
     }
 
 }
